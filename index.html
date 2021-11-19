@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <link rel="stylesheet" href="style.css">
+
+
+  <title>Document</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+
+  <!-- jQuery library -->
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+  <!-- Popper JS -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+
+  <!-- Latest compiled JavaScript -->
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</head>
+
+<body>
+
+
+  <div class="container"><br><br>
+    <h1 class="text-center text-warning">jquery Form Validation</h1>
+
+    <div class="col-lg-8 m-auto d-block">
+      <form action="">
+
+        <div class="form-group">
+          <label for="user"> username: </label>
+          <input class="form-control" autocomplete="off" type="text" name="username" id="usernames">
+
+          <h5 id="usercheck"></h5>
+
+
+        </div>
+
+        <div class="form-group">
+          <label for="password"> Password: </label>
+          <input class="form-control" type="password" autocomplete="off" name="password" id="password">
+          <h5 id="passwordcheck"></h5>
+
+        </div>
+
+        <div class="form-group">
+          <label for="confrime"> Confrime Password: </label>
+          <input class="form-control" autocomplete="off" type="password" name="confrime " id="confrime">
+          <h5 id="confrimecheck"></h5>
+
+        </div>
+
+        <input type="submit" name="" id="submitbtn" value="submit" class="btn btn-primary">
+
+
+      </form>
+
+
+    </div>
+  </div>
+
+  <script type="text/javascript">
+
+    $(document).ready(function () {
+      $('#usercheck').hide();
+      $('#passwordcheck').hide();
+      $('#confrimecheck').hide();
+
+      var user_err = true;
+      var pass_err = true;
+      var con_err = true;
+
+      $("#usernames").keyup(function () {
+        username_check();
+      });
+
+      function username_check() {
+        var user_val = $('#usernames').val();
+
+        if (user_val.length == " ") {
+
+          $('#usercheck').show();
+          $('#usercheck').html("<h6> ** please Fill the Username</h6>");
+          $('#usercheck').focus();
+          $('#usercheck').css("color", "red");
+          user_err = false;
+          return false;
+
+
+        } else {
+          $('#usercheck').hide();
+
+        }
+
+        if ((user_val.length < 3 ) || (user_val.length >10 )) {
+
+          $('#usercheck').show();
+          $('#usercheck').html("<h6> ** Username length must be between 3 and 10</h6>");
+          $('#usercheck').focus();
+          $('#usercheck').css("color", "red");
+          user_err = false;
+          return false;
+
+
+        } else {
+          $('#usercheck').hide();
+
+        }
+
+      }
+
+      $('#password').keyup(function(){
+
+        password_check();
+
+      });
+
+      function password_check(){
+        var pass_val = $ ('#password').val();
+
+        if( pass_val.length == " " ){
+
+          $('#passwordcheck').show();
+          $('#passwordcheck').html("<h6> ** please give a strong  password</h6>");
+          $('#passwordcheck').focus();
+          $('#passwordcheck').css("color", "red");
+          pass_err = false;
+          return false;
+
+        }else {
+          $('#passwordcheck').hide();
+
+        }
+
+        if (( pass_val.length < 8 )) {
+
+          $('#passwordcheck').show();
+          $('#passwordcheck').html("<h6> ** password length must be up to 8 ");
+          $('#passwordcheck').focus();
+          $('#passwordcheck').css("color", "red");
+          pass_err = false;
+          return false;
+
+
+        } else {
+          $('#passwordcheck').hide();
+
+        }
+
+
+
+
+      }
+
+
+      $('#confrime').keyup(function(){
+        confrime();
+      });
+
+      function confrime(){
+
+        var con_val =$('#confrime').val();
+
+        var pass_val = $ ('#password').val();
+        
+        if(pass_val != con_val){
+
+          $('#confrimecheck').show();
+          $('#confrimecheck').html("<h6> ** password are not Matching</h6>");
+          $('#confrimecheck').focus();
+          $('#confrimecheck').css("color", "red");
+          con_err = false;
+          return false;
+
+        }else {
+          $('#confrimecheck').hide();
+
+        }
+
+
+        
+      }
+
+      $("#submitbtn").click(function(){
+        user_err = true;
+        pass_err = true;
+        con_err = true;
+
+        username_check();
+        password_check();
+        confrime();
+
+        if((user_err == true ) && (pass_err == true) && (con_err == true)){
+          return true;
+        }else{
+          return false;
+        }
+
+
+
+
+
+
+
+
+      });
+
+    });
+
+  </script>
+
+
+
+
+
+
+</body>
+
+</html>
